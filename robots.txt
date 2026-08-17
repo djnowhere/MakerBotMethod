@@ -1,0 +1,5 @@
+# Crawling is intentionally allowed so that crawlers can read the
+# <meta name="robots" content="noindex, nofollow"> on each page.
+# Blocking here would prevent that tag from ever being seen.
+User-agent: *
+Allow: /
