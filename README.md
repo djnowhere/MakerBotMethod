@@ -18,3 +18,9 @@ a checklist — it is not a substitute for the videos.
 Single self-contained HTML file, no build step, no external dependencies.
 Figures come from one operator on one machine, largely nylon-CF and PETG —
 calibrated starting points, not manufacturer specifications.
+
+## Building
+
+`page.html` is the source. `index.html` is generated — run `./build.sh` after
+editing, which wraps it with the document head GitHub Pages needs (viewport,
+description, canonical, Open Graph). Don't edit `index.html` directly.
