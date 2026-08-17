@@ -10,7 +10,7 @@ ritual, a maintenance calendar, and a symptom→fix triage table.
 
 Almost everything here was worked out and documented by **Vince** at
 [Mastering The Method](https://www.youtube.com/@MasteringTheMethod/videos),
-who prints commercially on a Method X. This page reorganises his findings into
+who prints commercially on a Method X. This page reorganizes his findings into
 a checklist — it is not a substitute for the videos.
 
 ## Notes
