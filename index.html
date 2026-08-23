@@ -461,13 +461,19 @@ footer{
     <div class="kicker"><span>Part 3 — Material</span><span class="when">per spool · 5 min + overnight</span></div>
     <h2>Dry your filament</h2>
   </div>
-  <p class="partintro">Wet filament is the largest single cause of Method failures, and it is routinely misdiagnosed as a retraction-settings problem. Your printer already measures it — there is a humidity sensor in each filament bay that most owners never open. Start a drying cycle now; it runs while you do everything else.</p>
+  <p class="partintro">Wet filament is the largest single cause of Method failures, and it is routinely misdiagnosed as a retraction-settings problem. Your printer already measures it — each filament bay has a humidity sensor, reported on the touchscreen only. There is nothing to see or reach inside the bay; it is a number on a screen, and it is buried well enough that most owners never read it. Start a drying cycle now; it runs while you do everything else.</p>
 
   <div class="step">
     <div class="rail"><span class="num mono">3.1</span><span class="time mono">1 min</span></div>
     <div class="col">
       <h3>Read the bay humidity and write it down</h3>
-      <p>Go to <code>Settings → Advanced → Sensor Info</code> and scroll to the filament bays. Record the number for each bay.</p>
+      <p>Go to <code>Settings → System Settings → Sensor Info</code>, then <strong>scroll</strong> until you reach the filament bays. Record the number for each bay.</p>
+      <div class="caution">
+        <b>Why people give up here</b>
+        <p>The word “humidity” does not appear on this screen. The bays are listed as <strong>Bay 1</strong> and <strong>Bay 2</strong> with a percentage beside them — if you scan for the word you will conclude it is not there.</p>
+        <p>They are also <strong>not at the top of the list</strong>. Sensor Info is a long scrolling list of every sensor on the machine and the bays sit further along it. There is a <strong>refresh button</strong> on the screen; the value updates when you press it, so take the reading after a refresh rather than off a stale screen.</p>
+        <p>Older firmware put this under <code>Settings → Advanced</code>. That menu was renamed <strong>System Settings</strong> — if you are following a video from the CloudPrint era, that is the rename you are tripping over.</p>
+      </div>
       <div class="spec">
         <div class="r"><span class="k">Target</span><span class="v"><em>10–11% RH</em> — prints come out clean here</span></div>
         <div class="r"><span class="k">Act at</span><span class="v"><em>14–15% RH</em> — run a drying cycle</span></div>
@@ -481,7 +487,7 @@ footer{
     <div class="rail"><span class="num mono">3.2</span><span class="time mono">4 min</span></div>
     <div class="col">
       <h3>Run the drying cycle</h3>
-      <p>Unload the filament, clear the build plate, then <code>Settings → Advanced → Dry Material</code> and select your material — it carries preset times and temperatures.</p>
+      <p>Unload the filament, clear the build plate, then <code>Settings → System Settings → Dry Material</code> and select your material — it carries preset times and temperatures.</p>
       <div class="caution">
         <b>Ignore the bag prompt</b>
         <p>The wizard asks you to seal the spool in its metallised bag. <strong>Don't.</strong> Put the bare spool on the build plate with large desiccant packs around and on top of it. The heat reaches the filament directly instead of being blocked by the bag, and it dries faster.</p>
@@ -516,8 +522,8 @@ footer{
   <p class="partintro">This is the part that actually separates a reliable Method from an unreliable one, and almost none of it is in MakerBot's documentation. Ten minutes, in this order, every time. Tick as you go.</p>
 
   <ol class="check" data-list="ritual">
-    <li><label><input type="checkbox"><span class="txt"><strong>Check bay humidity</strong><span>Advanced → Sensor Info. Above 14–15%? Dry it before printing, not after the print fails.</span></span></label></li>
-    <li><label><input type="checkbox"><span class="txt"><strong>Clean the nozzle at 230 °C</strong><span>Advanced → Clean Extruders → custom temp. Not hotter — more heat means more back-pressure ooze to fight. Rotary stainless brush, ≤10,000 RPM, essentially no pressure. Snip the tail with flush cutters.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="txt"><strong>Check bay humidity</strong><span>System Settings → Sensor Info, scroll to Bay 1 / Bay 2. Above 14–15%? Dry it before printing, not after the print fails.</span></span></label></li>
+    <li><label><input type="checkbox"><span class="txt"><strong>Clean the nozzle at 230 °C</strong><span>System Settings → Clean Extruders → custom temp. Not hotter — more heat means more back-pressure ooze to fight. Rotary stainless brush, ≤10,000 RPM, essentially no pressure. Snip the tail with flush cutters.</span></span></label></li>
     <li><label><input type="checkbox"><span class="txt"><strong>Inspect the tip with the dental mirror</strong><span>Look at it. Do not assume. Debris here becomes part of the Z measurement and silently corrupts calibration.</span></span></label></li>
     <li><label><input type="checkbox"><span class="txt"><strong>Wash and fully dry the build plate</strong><span>Dawn dish soap to degrease, then dry completely — compressed air if you have it. No residual moisture.</span></span></label></li>
     <li><label><input type="checkbox"><span class="txt"><strong>Glue stick, then squeegee it flat</strong><span>Both directions with the plastic squeegee. You will never lay an even coat by hand; squeegeeing works it into the plate texture and levels it.</span></span></label></li>
