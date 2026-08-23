@@ -469,22 +469,43 @@ footer{
       <h3>Read the bay humidity and write it down</h3>
       <p>Go to <code>Settings → System Settings → Sensor Info</code>, then <strong>scroll</strong> until you reach the filament bays. Record the number for each bay.</p>
       <div class="caution">
-        <b>Why people give up here</b>
-        <p>The word “humidity” does not appear on this screen. The bays are listed as <strong>Bay 1</strong> and <strong>Bay 2</strong> with a percentage beside them — if you scan for the word you will conclude it is not there.</p>
-        <p>They are also <strong>not at the top of the list</strong>. Sensor Info is a long scrolling list of every sensor on the machine and the bays sit further along it. There is a <strong>refresh button</strong> on the screen; the value updates when you press it, so take the reading after a refresh rather than off a stale screen.</p>
-        <p>Older firmware put this under <code>Settings → Advanced</code>. That menu was renamed <strong>System Settings</strong> — if you are following a video from the CloudPrint era, that is the rename you are tripping over.</p>
+        <b>Scroll to the bottom — this is where people give up</b>
+        <p>Sensor Info <strong>opens on the tool heads</strong>. The first thing you see is two blocks headed <code>A/1</code> and <code>B/2</code>, and because the Method pairs bay 1 with extruder A and bay 2 with extruder B, those read exactly like “bay 1 and bay 2”. They are not. They are the extruders — the giveaway is fields like <code>ENCODER TICKS</code> and <code>GRADIENT FAN RPM</code>, which no filament bay has.</p>
+        <p><strong>The bays are at the very bottom of the list.</strong> Keep scrolling past the tool heads. Vince, on his own machine: <em>“it’s on the bottom of the sensor screen — it starts at tool heads and then you just scroll down and you’ll see filament bays coming up right there.”</em></p>
+        <p>There is a <strong>refresh button</strong>; the value is stale until you press it. And older firmware put all of this under <code>Settings → Advanced</code>, which was renamed <strong>System Settings</strong> — if you are following a CloudPrint-era video, that is the rename you are tripping over.</p>
       </div>
       <div class="spec">
-        <div class="r"><span class="k">Target</span><span class="v"><em>10–11% RH</em> — prints come out clean here</span></div>
+        <div class="r"><span class="k">Healthy bay</span><span class="v"><em>6–11% RH</em> — a working bay with live desiccant</span></div>
         <div class="r"><span class="k">Act at</span><span class="v"><em>14–15% RH</em> — run a drying cycle</span></div>
+        <div class="r"><span class="k">Very high</span><span class="v"><em>~22% RH</em> — filament never dried, expect ooze</span></div>
+        <div class="r"><span class="k">Bay is dead</span><span class="v"><em>40%+</em> — that is room air; see below</span></div>
         <div class="r"><span class="k">Settle time</span><span class="v">2–3 h in the bay for a true reading</span></div>
+      </div>
+      <div class="caution">
+        <b>A reading near 40–55% means the bay is doing nothing</b>
+        <p>That is ambient room humidity. The bays are sealed, but sealing is all they do — the drying is entirely down to the desiccant inside. A bay sitting at room humidity has <strong>no desiccant, or desiccant that saturated months ago</strong>, and it has been storing your filament in room air the whole time. Saturated desiccant is worse than none: it turns the bay into a humidifier.</p>
+        <p>Fix this <em>before</em> you dry anything. A spool dried for three days and returned to a 53% bay is back where it started.</p>
       </div>
       <div class="vfy"><b>Verify</b><span>You have a written number per bay. This is your baseline — every future reading is compared to it.</span></div>
     </div>
   </div>
 
   <div class="step">
-    <div class="rail"><span class="num mono">3.2</span><span class="time mono">4 min</span></div>
+    <div class="rail"><span class="num mono">3.2</span><span class="time mono">5 min</span></div>
+    <div class="col">
+      <h3>Charge the bays with desiccant</h3>
+      <p>This is the step that makes the bay a dry box instead of a sealed box, and it is the one nobody mentions. In Vince&rsquo;s words: <em>&ldquo;these bays are airtight, but without desiccant you&rsquo;re not going to get rid of the humidity within the bay.&rdquo;</em></p>
+      <p>Two <strong>large</strong> packs per bay — the 76 g ones that ship with genuine MakerBot spools, not the sachets that come in a shoe box. He has driven a bay down to <strong>1% RH</strong> this way. If your packs are old, regenerate them in the oven first; a saturated pack does nothing.</p>
+      <div class="caution">
+        <b>They must come out before you print</b>
+        <p>Packs that size will foul the bay during a job. Put a sticky note on each bay door. This is Vince&rsquo;s own workaround and it exists because the mistake is easy and expensive.</p>
+      </div>
+      <div class="vfy"><b>Verify</b><span>Re-read the bay after a few hours. The number is falling. If it is not, the desiccant is spent.</span></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="rail"><span class="num mono">3.3</span><span class="time mono">4 min</span></div>
     <div class="col">
       <h3>Run the drying cycle</h3>
       <p>Unload the filament, clear the build plate, then <code>Settings → System Settings → Dry Material</code> and select your material — it carries preset times and temperatures.</p>
@@ -497,12 +518,34 @@ footer{
         <div class="r"><span class="k">Stated duration</span><span class="v">24 h</span></div>
         <div class="r"><span class="k">Real duration</span><span class="v">Nylon-CF has needed <em>3 consecutive days</em></span></div>
       </div>
+      <p><strong>Dry more than one spool at once.</strong> Everything in the chamber reaches chamber temperature, so bare spools sitting side by side on the plate all dry together. Every preset is capped at the same 70 °C, so running a mixed load on the longest material&rsquo;s preset costs the others nothing — and PVA in particular wants all the heat it can get. One long run beats two serial ones.</p>
+      <div class="caution">
+        <b>Simplify3D lifts the 70 °C cap</b>
+        <p>The 70 °C ceiling is a firmware limit, not a hardware one. Simplify3D&rsquo;s machine control panel writes chamber temperature directly and ignores it — set the temperature type to <em>heated build platform</em> and save it as its own profile.</p>
+        <p>Vince runs <strong>110 °C for an hour or two, then drops to 90 °C</strong> and lets it coast; he calls it the reverse pyramid. For nylon-CF this turns a three-day soak into hours. You can also lower the build plate on the Z axis and stack several spools, which makes the whole printer a filament dryer.</p>
+      </div>
       <div class="vfy"><b>Verify</b><span>Reload the spool, wait 2–3 h, re-read the bay. The number moved down. If it didn't, dry again — the timer ending is not the same as the filament being dry.</span></div>
     </div>
   </div>
 
   <div class="step">
-    <div class="rail"><span class="num mono">3.3</span><span class="time mono">ongoing</span></div>
+    <div class="rail"><span class="num mono">3.4</span><span class="time mono">5 min</span></div>
+    <div class="col">
+      <h3>Test whether the filament is actually dry</h3>
+      <p>The bay reading does not answer this. It measures the air, not the water already inside the plastic — <em>&ldquo;do not confuse that reading with the humidity in your filament, that&rsquo;s two different things.&rdquo;</em> Vince has had wet PVA in a single-digit bay, and printed cleanly with a bay at 10%. You need a direct test.</p>
+      <p><strong>The break test.</strong> Purge the extruder and let the <em>full</em> cycle run — do not cut it short to save filament. Then hit confirm and watch the strand:</p>
+      <div class="spec">
+        <div class="r"><span class="k">Dry</span><span class="v">Tapers thin and <em>snaps off within ~10 s</em>, clean break</span></div>
+        <div class="r"><span class="k">Wet</span><span class="v">Hangs on, stays gummy, will not break</span></div>
+        <div class="r"><span class="k">Wet</span><span class="v">Bubbles, popping, uneven strand during the purge</span></div>
+      </div>
+      <p>A clean purge should be smooth and concentric the whole way through. Bubbles anywhere mean moisture all the way through. This is also why the purge tower is worth watching on a real print: if the printer cannot lay down a clean little box, the geometry that follows will not be better.</p>
+      <div class="vfy"><b>Verify</b><span>The strand breaks cleanly within ten seconds. If it does not, run another cycle — the timer ending is not the same as the filament being dry.</span></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="rail"><span class="num mono">3.5</span><span class="time mono">ongoing</span></div>
     <div class="col">
       <h3>Adopt three habits</h3>
       <p><strong>Dry every spool the day it arrives.</strong> New filament is not dry filament — nobody knows how long it sat unbagged after extrusion, including the manufacturer.</p>
@@ -684,7 +727,7 @@ footer{
     <div class="row">
       <span class="sym">Failures cluster on jobs using PVA or SR-30 support</span>
       <span class="then">Soluble supports absorb moisture fastest and fail first — that's your cause</span>
-      <span class="go"><a href="#p3">Part 3.3 — soluble supports</a></span>
+      <span class="go"><a href="#p3">Part 3.5 — soluble supports</a></span>
     </div>
     <div class="row">
       <span class="sym">Mid-print jam with no obvious cause</span>
@@ -722,7 +765,8 @@ footer{
       <tr><td class="n">Part 2</td><td>CloudPrint vs Simplify3D 5.1 — direct print comparison</td><td class="n">14 min</td><td class="n">✓</td></tr>
       <tr><td class="n">Part 2.2B</td><td>Increasing the Method's print speed by 39% (2500 mm/min)</td><td class="n">23 min</td><td class="n">—</td></tr>
       <tr><td class="n">Part 3</td><td>Using Simplify's chamber control for optimal filament drying</td><td class="n">5 min</td><td class="n">—</td></tr>
-      <tr><td class="n">Part 3</td><td>When to run a drying cycle on the Method's PVA (parts 1 &amp; 2)</td><td class="n">22 min</td><td class="n">—</td></tr>
+      <tr><td class="n">Part 3</td><td>When to run a drying cycle on the Method's PVA (parts 1 &amp; 2)</td><td class="n">22 min</td><td class="n">✓</td></tr>
+      <tr><td class="n">Part 3.3</td><td>How to dry filament at up to 110 °C with the Method</td><td class="n">19 min</td><td class="n">✓</td></tr>
       <tr><td class="n">—</td><td>ABS-R and Rapid Rinse support combo print settings</td><td class="n">25 min</td><td class="n">—</td></tr>
       <tr><td class="n">—</td><td>How to convert Method's extruders 1XA to 2XA</td><td class="n">14 min</td><td class="n">—</td></tr>
       <tr><td class="n">—</td><td>Extend the Method's X-axis build volume 25% (single extruder)</td><td class="n">11 min</td><td class="n">—</td></tr>
@@ -730,7 +774,7 @@ footer{
     </tbody>
   </table>
   </div>
-  <p>The remaining videos cover BuildTak sheet as a stock build-plate replacement, small-part printing settings, a drying-at-110 °C workaround, and Simplify3D's machine control panel.</p>
+  <p>The remaining videos cover BuildTak sheet as a stock build-plate replacement, small-part printing settings, and Simplify3D's machine control panel.</p>
   <div class="caution">
     <b>One source, one machine</b>
     <p>This is a single operator's experience, largely on nylon-CF and PETG on a Method X. It's empirical and specific, which is its value — but it is not a manufacturer spec, and it hasn't been cross-checked against a second operator. Treat the numbers as calibrated starting points.</p>
