@@ -388,28 +388,33 @@ footer{
     <div class="kicker"><span>Part 2 — Toolchain</span><span class="when">once · ~30 min</span></div>
     <h2>Fix the slicer</h2>
   </div>
-  <p class="partintro">CloudPrint's stock "Balanced" profile is not a conservative starting point, and it is presented as though it were tested. This is where a lot of the Method's bad reputation actually comes from. Pick one of the two paths below.</p>
+  <p class="partintro">Your slicer's stock profile is not a conservative starting point, and it is presented as though it were tested. This is where a lot of the Method's bad reputation actually comes from. Read your own numbers first, then pick one of the two paths below.</p>
+  <div class="caution">
+    <b>CloudPrint is gone</b>
+    <p>MakerBot CloudPrint was retired on <strong>1 October 2025</strong> and shut down entirely that December. The Method series now slices in <strong>UltiMaker Cura</strong> — the desktop app, or the browser version built into Digital Factory — and queues jobs through <strong>UltiMaker Digital Factory</strong>.</p>
+    <p>Printers were not carried across automatically. If yours has sat idle since the shutdown you have to <strong>reconnect it to Digital Factory by hand</strong> before it will accept a job at all. A Method that suddenly stopped receiving prints is an account problem, not a hardware fault — check this before you touch anything mechanical.</p>
+  </div>
 
   <div class="step">
     <div class="rail"><span class="num mono">2.1</span><span class="time mono">2 min</span></div>
     <div class="col">
       <h3>Look at what your slicer is actually asking for</h3>
-      <p>In CloudPrint, type <code>speed</code> into the settings search box. These are the stock values — note that CloudPrint expresses speed in millimetres per <strong>second</strong>:</p>
+      <p>In Cura, type <code>speed</code> into the settings search box and read the values <em>your</em> profile is actually using. Speed is expressed in millimetres per <strong>second</strong>. For scale, CloudPrint’s stock “Balanced” profile — what most Method owners printed on for years — shipped these:</p>
       <div class="spec">
         <div class="r"><span class="k">Outlines</span><span class="v">10 mm/s</span></div>
         <div class="r"><span class="k">Solid infill</span><span class="v"><em>50 mm/s</em> ≈ 2 in/s</span></div>
         <div class="r"><span class="k">Sparse infill</span><span class="v"><em>110 mm/s</em> ≈ 4.3 in/s</span></div>
         <div class="r"><span class="k">Bed width, for scale</span><span class="v">≈ 7 in</span></div>
       </div>
-      <p>Sparse infill crosses the whole bed in under two seconds.</p>
-      <div class="vfy"><b>Verify</b><span>You've seen the numbers yourself. If they've been changed from stock, note what they are before touching anything.</span></div>
+      <p>Sparse infill crosses the whole bed in under two seconds. Cura ships UltiMaker’s own Method profiles, so your numbers will not match these line for line — which is the whole reason you read yours instead of trusting a figure off a web page. The question is not whether they equal the values above, it is whether anything is being asked to move fast on a printer that is not keeping up.</p>
+      <div class="vfy"><b>Verify</b><span>You&rsquo;ve seen your own numbers. If they&rsquo;ve been changed from the profile default, note what they are before touching anything.</span></div>
     </div>
   </div>
 
   <div class="step">
     <div class="rail"><span class="num mono">2.2A</span><span class="time mono">25 min</span></div>
     <div class="col">
-      <h3>Path A — stay on CloudPrint and walk the speeds down</h3>
+      <h3>Path A — stay on Cura and walk the speeds down</h3>
       <p>Free, tedious, and effective. Search <code>speed</code> and set every speed value to <strong>10 mm/s</strong> as a floor. Print successfully at that floor, then raise values in <strong>5–10% increments</strong>, one group at a time, until quality degrades — then back off one step.</p>
       <p>It is genuinely dozens of settings and many have no tooltip. Budget the time honestly.</p>
       <div class="vfy"><b>Verify</b><span>A test print completes cleanly at the floor speed before you raise anything.</span></div>
@@ -682,6 +687,7 @@ footer{
   </div>
   <p class="partintro">Nearly everything here comes from <a href="https://www.youtube.com/@MasteringTheMethod/videos">Mastering The Method</a> — one operator, Vince, who prints commercially on a Method X and documents the machine at a level MakerBot never did. 34 videos, mostly 100–1,000 views, which is why none of it surfaces in a normal search.</p>
   <p>If a step above is unclear, the video behind it will show you the physical motion in a way text can't. <strong>Read</strong> means I worked from the full transcript; the rest I catalogued but didn't read.</p>
+  <p>Two of these were recorded in CloudPrint, which no longer exists. The <em>reasoning</em> in them still holds — what a speed setting does to a print has not changed — but the interface on screen will not match what you see in Cura. Watch them for the why, not for where the buttons are.</p>
   <div class="scroll">
   <table>
     <thead><tr><th>Backs</th><th>Video</th><th>Length</th><th>Read</th></tr></thead>
